@@ -1,0 +1,6 @@
+{
+  "port": 5000,
+  "jwtSecret": "raykind",
+  "mongoUri": "mongodb+srv://raykind:89519527902@cluster0.bnmr9.mongodb.net/innoscripta?retryWrites=true&w=majority",
+  "baseUrl": "http://localhost:5000"
+}
