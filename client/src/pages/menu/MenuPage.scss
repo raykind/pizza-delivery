@@ -1,0 +1,9 @@
+.pizza-menu-window {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  .pizza-catalog {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react'
-import {useHttp} from "../hooks/http.hook";
-import {useMessage} from "../hooks/message.hook";
-import {login} from "../redux/actions";
+import {useHttp} from "../../hooks/http.hook";
+import {useMessage} from "../../hooks/message.hook";
+import {login} from "../../redux/actions";
 import {connect} from "react-redux";
 
 const AuthPage = ({ login }) => {
