@@ -1,15 +1,14 @@
 import React, {useEffect} from "react";
-import {getAllPizza} from "../../redux/actions";
-import {connect, useDispatch} from "react-redux";
+import {addToCart} from "../../redux/actions";
+import {connect} from "react-redux";
 import {useHttp} from "../../hooks/http.hook";
 import {useMessage} from "../../hooks/message.hook";
 import {Loader} from "../../components/loader/Loader";
 import './MenuPage.scss'
-import {PizzaCard} from "../../components/pizza-card/PizzaCard";
+import PizzaCard from "../../components/pizza-card/PizzaCard";
 
-const MenuPage = ({ pizza }) => {
-  const dispatch = useDispatch()
-  const {request, error, clearError} = useHttp()
+const MenuPage = ({ pizza, addToCart, cart }) => {
+  const {error, clearError} = useHttp()
   const message = useMessage()
 
   useEffect(() => {
@@ -18,8 +17,18 @@ const MenuPage = ({ pizza }) => {
   }, [error, message, clearError])
 
   useEffect(() => {
-    dispatch(getAllPizza(request))
-  }, [dispatch, request])
+    const cartPizzaIds = JSON.parse(localStorage.getItem('cartPizzaIds'))
+
+    if (pizza.length && cartPizzaIds && cartPizzaIds.length) {
+      cartPizzaIds.forEach(pizzaId => {
+        const pizzaObject = pizza.find(item => item._id === pizzaId)
+        if (pizzaObject && cart.findIndex(item => item._id === pizzaObject._id) === -1) {
+          addToCart(pizzaObject)
+        }
+      })
+    }
+  }, [pizza, cart, addToCart])
+
 
   if (!pizza.length) {
     return <Loader />
@@ -36,8 +45,13 @@ const MenuPage = ({ pizza }) => {
 }
 
 const mapStateToProps = state => ({
-  pizza: state.pizza
+  pizza: state.pizza,
+  cart: state.cart
 })
 
+const mapDispatchToProps = {
+  addToCart
+}
 
-export default connect(mapStateToProps)(MenuPage)
+
+export default connect(mapStateToProps, mapDispatchToProps)(MenuPage)

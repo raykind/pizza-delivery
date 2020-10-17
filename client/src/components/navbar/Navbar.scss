@@ -1,0 +1,15 @@
+.nav-wrapper {
+  padding: 0 2rem;
+
+  .order-count {
+    float: right;
+    background-color: red;
+    height: 20px;
+    width: 20px;
+    margin-top: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+  }
+}

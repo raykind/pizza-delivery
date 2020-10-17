@@ -2,8 +2,9 @@ import React from "react";
 import {NavLink, useHistory} from 'react-router-dom'
 import {connect} from "react-redux";
 import {logout} from "../../redux/actions";
+import './Navbar.scss'
 
-const Navbar = ({ token, logout }) => {
+const Navbar = ({ token, cart, logout }) => {
   const history = useHistory()
 
   const logoutHandler = event => {
@@ -15,10 +16,15 @@ const Navbar = ({ token, logout }) => {
   return (
     <div className="navbar-fixed">
       <nav>
-        <div className="nav-wrapper deep-purple accent-1" style={{ padding: '0 2rem'}}>
+        <div className="nav-wrapper deep-purple accent-1">
           <span className="brand-logo">Innoscripta Pizza Delivery Service</span>
           <ul id="nav-mobile" className="right hide-on-med-and-down">
-            <li><NavLink to="/cart">Cart</NavLink></li>
+            <li><NavLink to="/menu">Menu</NavLink></li>
+            <li><NavLink to="/cart">Cart{
+              cart.length
+                ? <span className="order-count">{cart.length}</span>
+                : ''
+            }</NavLink></li>
             { token && <li><NavLink to="/orders">Your Orders</NavLink></li> }
             { token && <li><a href="/" onClick={logoutHandler}>Log Out</a></li> }
           </ul>
@@ -29,7 +35,8 @@ const Navbar = ({ token, logout }) => {
 }
 
 const mapStateToProps = state => ({
-  token: state.token
+  token: state.token,
+  cart: state.cart
 })
 
 const mapDispatchToProps = {

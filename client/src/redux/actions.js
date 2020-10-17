@@ -1,6 +1,7 @@
 import {
+  ADD_TO_CART,
   GET_ALL_PIZZA_LOADED,
-  LOGIN, LOGOUT,
+  LOGIN, LOGOUT, REMOVE_FROM_CART,
 } from "./types";
 
 
@@ -32,5 +33,19 @@ export function getAllPizza(request) {
     } catch (e) {
       console.log(e)
     }
+  }
+}
+
+export function addToCart(pizza) {
+  return {
+    type: ADD_TO_CART,
+    payload: pizza
+  }
+}
+
+export function removeFromCart(pizza) {
+  return {
+    type: REMOVE_FROM_CART,
+    payload: pizza
   }
 }

@@ -1,0 +1,49 @@
+.pizza-cart-row {
+  height: 100px;
+  width: 100%;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+
+  .pizza-description {
+    border-radius: 7px;
+    padding-right: 10px;
+    height: 100%;
+    flex-grow: 1;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+
+    .pizza-image {
+      border-radius: 7px;
+      margin-left: 10px;
+      margin-right: 10px;
+      height: 80%;
+      width: 150px;
+    }
+
+    .pizza-name {
+      font-size: 25px;
+      width: 200px;
+    }
+
+    .pizza-weight {
+      font-size: 20px;
+      width: 100px;
+      margin-right: 10px;
+      color: #5c5c5c;
+    }
+
+    .pizza-cost {
+      padding: 10px 10px;
+      text-align: center;
+      border-radius: 20px;
+      width: 100px;
+      color: #fff;
+    }
+
+    .delete-btn {
+      border-radius: 7px;
+    }
+  }
+}

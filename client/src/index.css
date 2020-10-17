@@ -17,3 +17,14 @@ input.yellow-input:focus {
   border-bottom: 1px solid #ffeb3b !important;
   box-shadow: 0 1px 0 0 #ffeb3b !important;
 }
+
+.row {
+  display: flex !important;
+  flex-direction: row !important;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+

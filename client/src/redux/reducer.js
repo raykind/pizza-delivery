@@ -1,12 +1,14 @@
 import {
+  ADD_TO_CART,
   GET_ALL_PIZZA_LOADED,
-  LOGIN, LOGOUT
+  LOGIN, LOGOUT, REMOVE_FROM_CART
 } from "./types";
 
 const initialState = {
   token: null,
   userId: null,
-  pizza: []
+  pizza: [],
+  cart: []
 }
 
 export const rootReducer = (state = initialState, action) => {
@@ -28,6 +30,20 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         pizza: action.payload
+      }
+    case ADD_TO_CART:
+      const newExtendedCart = [...state.cart, action.payload]
+      localStorage.setItem('cartPizzaIds', JSON.stringify(newExtendedCart.map(item => item._id)))
+      return {
+        ...state,
+        cart: newExtendedCart
+      }
+    case REMOVE_FROM_CART:
+      const newCollapsedCart = state.cart.filter(item => item._id !== action.payload._id)
+      localStorage.setItem('cartPizzaIds', JSON.stringify(newCollapsedCart.map(item => item._id)))
+      return {
+        ...state,
+        cart: newCollapsedCart
       }
     default:
       return state

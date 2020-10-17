@@ -4,22 +4,30 @@ import './App.css';
 import 'materialize-css'
 import {useRoutes} from "./routes";
 import {connect, useDispatch} from "react-redux";
-import {login} from "./redux/actions";
+import {getAllPizza, login} from "./redux/actions";
+import {useHttp} from "./hooks/http.hook";
+import {Loader} from "./components/loader/Loader";
 
-const App = ({ token }) => {
+const App = ({ token, pizza, login }) => {
+  const data = JSON.parse(localStorage.getItem('userData'))
+
+  if (data && data.token) {
+    login({token: data.token, userId: data.userId})
+  }
+
   const dispatch = useDispatch()
+  const {request} = useHttp()
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem('userData'))
+    dispatch(getAllPizza(request))
+  }, [dispatch, request])
 
-    if (data && data.token) {
-      dispatch(login({token: data.token, userId: data.userId}))
-    }
-  }, [dispatch])
-
-
-  const isAuthenticated = !!token
+  const isAuthenticated = !!token || !!data.token
   const routes = useRoutes(isAuthenticated);
+
+  if (!pizza.length) {
+    return <Loader />
+  }
 
   return (
     <Router>
@@ -32,8 +40,13 @@ const App = ({ token }) => {
 
 const mapStateToProps = state => {
   return {
-    token: state.token
+    token: state.token,
+    pizza: state.pizza
   }
 }
 
-export default connect(mapStateToProps)(App)
+const mapDispatchToProps = {
+  login
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

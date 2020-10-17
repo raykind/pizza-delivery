@@ -3,6 +3,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import MenuPage from "./pages/menu/MenuPage";
 import AuthPage from "./pages/auth/AuthPage";
 import Navbar from "./components/navbar/Navbar";
+import Cart from "./pages/cart/Cart";
 
 export const useRoutes = isAuthenticated => {
   if (isAuthenticated) {
@@ -12,6 +13,9 @@ export const useRoutes = isAuthenticated => {
         <Switch>
           <Route path="/menu" exact>
             <MenuPage />
+          </Route>
+          <Route path="/cart">
+            <Cart />
           </Route>
           <Redirect to="/menu" />
         </Switch>

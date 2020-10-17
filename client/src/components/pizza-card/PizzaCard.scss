@@ -6,11 +6,6 @@
   padding: 10px;
   width: 575px;
 
-  .row {
-    display: flex;
-    flex-direction: row;
-  }
-
   .left-part,
   .right-part {
     display: flex;
@@ -26,22 +21,25 @@
     }
 
     .pizza-description {
+      flex-grow: 1;
       word-break: break-word;
       color: #848484;
     }
   }
 
   .right-part {
-    .pizza-measures {
-      width: 100%;
-      justify-content: space-between;
-      margin-top: 10px;
+    .pizza-image {
+      flex-grow: 1;
+      img {
+        width: 200px;
+        height: 150px;
+        border-radius: 7px;
+      }
     }
 
-    .pizza-image {
-      width: 200px;
-      height: 150px;
-      border-radius: 7px;
+    .add-to-cart-btn {
+      margin-top: 10px;
+      border-radius: 20px;
     }
   }
 }

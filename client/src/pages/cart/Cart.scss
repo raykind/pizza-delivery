@@ -1,0 +1,17 @@
+.cart-page {
+  padding: 20px;
+
+  .cart-table {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .row {
+    align-items: center;
+  }
+
+  .order-btn {
+    margin: 10px 10px 0 50px;
+    border-radius: 7px;
+  }
+}
