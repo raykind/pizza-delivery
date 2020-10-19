@@ -21,6 +21,9 @@ input.yellow-input:focus {
 .row {
   display: flex !important;
   flex-direction: row !important;
+  margin-left: inherit !important;
+  margin-right: inherit !important;
+  margin-bottom: 0 !important;
 }
 
 .spacer {

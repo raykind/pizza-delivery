@@ -1,5 +1,5 @@
 import {
-  ADD_TO_CART,
+  ADD_TO_CART, CLEAR_CART,
   GET_ALL_PIZZA_LOADED,
   LOGIN, LOGOUT, REMOVE_FROM_CART
 } from "./types";
@@ -44,6 +44,12 @@ export const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         cart: newCollapsedCart
+      }
+    case CLEAR_CART:
+      localStorage.removeItem('cartPizzaIds')
+      return {
+        ...state,
+        cart: []
       }
     default:
       return state

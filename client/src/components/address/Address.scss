@@ -1,0 +1,28 @@
+.address-edit {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+
+  .address-fields {
+    display: flex;
+  }
+
+  .country-field,
+  .city-field,
+  .district-field {
+    flex-grow: 0.5;
+    margin-right: 15px;
+  }
+
+  .street-field,
+  .building-field,
+  .flat-field,
+  .room-field {
+    flex-grow: 1;
+    margin-right: 15px;
+  }
+
+  .order-btn {
+    width: 200px;
+  }
+}

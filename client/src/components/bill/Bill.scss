@@ -1,0 +1,15 @@
+.bill {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+
+  .bill-details,
+  .pizza-details {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .catalog-btn {
+    width: 200px;
+  }
+}

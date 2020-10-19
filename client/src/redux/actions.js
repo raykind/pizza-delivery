@@ -1,5 +1,5 @@
 import {
-  ADD_TO_CART,
+  ADD_TO_CART, CLEAR_CART,
   GET_ALL_PIZZA_LOADED,
   LOGIN, LOGOUT, REMOVE_FROM_CART,
 } from "./types";
@@ -49,3 +49,9 @@ export function removeFromCart(pizza) {
     payload: pizza
   }
 }
+export function clearCart() {
+  return {
+    type: CLEAR_CART
+  }
+}
+

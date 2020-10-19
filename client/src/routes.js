@@ -4,6 +4,7 @@ import MenuPage from "./pages/menu/MenuPage";
 import AuthPage from "./pages/auth/AuthPage";
 import Navbar from "./components/navbar/Navbar";
 import Cart from "./pages/cart/Cart";
+import MakeOrder from "./pages/make-order/MakeOrder";
 
 export const useRoutes = isAuthenticated => {
   if (isAuthenticated) {
@@ -16,6 +17,9 @@ export const useRoutes = isAuthenticated => {
           </Route>
           <Route path="/cart">
             <Cart />
+          </Route>
+          <Route path="/make-order">
+            <MakeOrder />
           </Route>
           <Redirect to="/menu" />
         </Switch>

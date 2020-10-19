@@ -1,21 +1,13 @@
 import React, {useCallback, useEffect, useState} from "react";
 import {connect} from "react-redux";
+import {useHistory} from 'react-router-dom'
 import './Cart.scss'
 import {addToCart, removeFromCart} from "../../redux/actions";
 import PizzaCartRow from "../../components/pizza-cart-row/PizzaCartRow";
 
 const Cart = ({ cart, pizza, addToCart, removeFromCart }) => {
-  useEffect(() => {
-    if (!cart.length) {
-      const cartPizzaIds = JSON.parse(localStorage.getItem('cartPizzaIds'))
-
-      if (pizza.length && cartPizzaIds && cartPizzaIds.length) {
-        cartPizzaIds.forEach(pizzaId => {
-          addToCart(pizza.find(item => item._id === pizzaId))
-        })
-      }
-    }
-  }, [addToCart, cart, pizza])
+  const history = useHistory()
+  const [total, setTotal] = useState(0)
 
   const deletePizza = pizzaId => {
     removeFromCart(pizza.find(item => item._id === pizzaId))
@@ -31,7 +23,21 @@ const Cart = ({ cart, pizza, addToCart, removeFromCart }) => {
     }, 0)
   }, [cart])
 
-  const [total, setTotal] = useState(0)
+  const makeOrder = () => {
+    history.push('/make-order')
+  }
+
+  useEffect(() => {
+    if (!cart.length) {
+      const cartPizzaIds = JSON.parse(localStorage.getItem('cartPizzaIds'))
+
+      if (pizza.length && cartPizzaIds && cartPizzaIds.length) {
+        cartPizzaIds.forEach(pizzaId => {
+          addToCart(pizza.find(item => item._id === pizzaId))
+        })
+      }
+    }
+  }, [addToCart, cart, pizza])
 
   useEffect(() => {
     if (cart.length) {
@@ -63,6 +69,7 @@ const Cart = ({ cart, pizza, addToCart, removeFromCart }) => {
               <h6>(3$ Delivery)</h6>
               <button
                 className="waves-effect waves-light purple darken-4 order-btn btn"
+                onClick={makeOrder}
               >make order</button>
             </div>
           </>
