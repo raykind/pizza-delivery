@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
-import {addToCart} from "../../redux/actions";
-import {connect} from "react-redux";
+import {addToCart, getAllPizza} from "../../redux/actions";
+import {connect, useDispatch} from "react-redux";
 import {useHttp} from "../../hooks/http.hook";
 import {useMessage} from "../../hooks/message.hook";
 import {Loader} from "../../components/loader/Loader";
@@ -10,6 +10,12 @@ import PizzaCard from "../../components/pizza-card/PizzaCard";
 const MenuPage = ({ pizza, addToCart, cart }) => {
   const {error, clearError} = useHttp()
   const message = useMessage()
+  const dispatch = useDispatch()
+  const {request} = useHttp()
+
+  useEffect(() => {
+    dispatch(getAllPizza(request))
+  }, [dispatch, request])
 
   useEffect(() => {
     message(error)

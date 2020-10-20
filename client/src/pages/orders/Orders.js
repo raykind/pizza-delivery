@@ -52,4 +52,4 @@ const mapDispatchToProps = {
   getAllPizza
 }
 
-export default connect(mapStateToProps)(Orders)
+export default connect(mapStateToProps, mapDispatchToProps)(Orders)

@@ -1,33 +1,20 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {BrowserRouter as Router} from 'react-router-dom'
 import './App.css';
 import 'materialize-css'
 import {useRoutes} from "./routes";
-import {connect, useDispatch} from "react-redux";
-import {getAllPizza, login} from "./redux/actions";
-import {useHttp} from "./hooks/http.hook";
-import {Loader} from "./components/loader/Loader";
+import {connect} from "react-redux";
+import {login} from "./redux/actions";
 
-const App = ({ token, pizza, login }) => {
+const App = ({ token, login }) => {
   const data = JSON.parse(localStorage.getItem('userData'))
 
   if (data && data.token) {
     login({token: data.token, userId: data.userId})
   }
 
-  const dispatch = useDispatch()
-  const {request} = useHttp()
-
-  useEffect(() => {
-    dispatch(getAllPizza(request))
-  }, [dispatch, request])
-
   const isAuthenticated = !!token || !!(data && data.token)
   const routes = useRoutes(isAuthenticated);
-
-  if (!pizza.length) {
-    return <Loader />
-  }
 
   return (
     <Router>
