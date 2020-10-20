@@ -1,0 +1,46 @@
+.order-box {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border: 1px solid grey;
+  border-radius: 7px;
+  margin-bottom: 15px;
+
+  .pizza-row {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+
+    img,
+    .pizza-name,
+    .pizza-weight,
+    .pizza-cost {
+      margin-right: 10px;
+    }
+
+    img {
+      width: 100px;
+      height: 75px;
+      border-radius: 7px;
+    }
+
+    .pizza-name {
+      font-size: 20px;
+    }
+    .pizza-weight,
+    .pizza-cost {
+      font-size: 18px;
+    }
+
+    .pizza-weight {
+      color: #5c5c5c;
+    }
+
+    .pizza-cost {
+      font-weight: bold;
+      padding: 5px 20px;
+      color: #fff;
+      border-radius: 20px;
+    }
+  }
+}

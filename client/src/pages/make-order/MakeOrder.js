@@ -2,9 +2,11 @@ import React, {useState} from "react";
 import {connect} from "react-redux";
 import Address from "../../components/address/Address";
 import Bill from "../../components/bill/Bill";
+import {useHttp} from "../../hooks/http.hook";
 
-const MakeOrder = ({ cart }) => {
+const MakeOrder = ({ cart, userId, token }) => {
   const savedCart = cart;
+  const { request } = useHttp();
   const [isComplete, setIsComplete] = useState(false)
   const [address, setAddress] = useState(null)
 
@@ -13,9 +15,33 @@ const MakeOrder = ({ cart }) => {
     return sum + pizza.cost
   }, 0)
 
-  const onAddressFilled = addressObject => {
+  const onAddressFilled = async addressObject => {
+    const addressStr = '' + (addressObject.country ? addressObject.country + ', ': '') +
+      (addressObject.district ? addressObject.district + ' district, ': '') +
+      (addressObject.city ? addressObject.city + ', ': '') +
+      (addressObject.street ? addressObject.street + ' st, ': '') +
+      (addressObject.building ? addressObject.building + ' building, ': '') +
+      (addressObject.flat ? addressObject.flat + ' flat, ': '') +
+      (addressObject.room ? addressObject.room + ' room': '')
     setIsComplete(true)
-    setAddress(addressObject)
+    setAddress(addressStr)
+
+    if (token) {
+      const orderData = {
+        address: addressStr,
+        total,
+        userId,
+        order: []
+      }
+
+      orderData.order = cart.map(pizzaItem => {
+        return pizzaItem._id
+      })
+
+      await request('/api/orders/save', 'POST', {
+        ...orderData
+      })
+    }
   }
 
   if (!isComplete) {
@@ -26,6 +52,9 @@ const MakeOrder = ({ cart }) => {
 }
 
 const mapStateToProps = state => ({
-  cart: state.cart
+  cart: state.cart,
+  token: state.token,
+  userId: state.userId
 })
+
 export default connect(mapStateToProps)(MakeOrder)

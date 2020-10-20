@@ -49,6 +49,7 @@ export function removeFromCart(pizza) {
     payload: pizza
   }
 }
+
 export function clearCart() {
   return {
     type: CLEAR_CART

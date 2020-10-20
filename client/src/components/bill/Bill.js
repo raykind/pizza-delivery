@@ -21,18 +21,12 @@ const Bill = ({ total, address, pizzaDetails }) => {
       <div className="bill-details">
         <h6>Address:</h6>
         <div className="address">
-          {address.country ? address.country + ', ': ''}
-          {address.district ? address.district + ' district, ': ''}
-          {address.city ? address.city + ', ': ''}
-          {address.street ? address.street + ' st, ': ''}
-          {address.building ? address.building + ' building, ': ''}
-          {address.flat ? address.flat + ' flat, ': ''}
-          {address.room ? address.room + ' room': ''}
+          {address}
         </div>
         <h6>Pizza details:</h6>
         <div className="pizza-details">
           {pizzaDetails.map(pizza => {
-            return <span className="pizza-row"
+            return <span className="pizza-row" key={pizza._id}
             >pizza: {pizza.name}, weight: {pizza.weight}, cost: {pizza.cost}
             </span>
           })}
