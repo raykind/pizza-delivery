@@ -22,7 +22,7 @@ const App = ({ token, pizza, login }) => {
     dispatch(getAllPizza(request))
   }, [dispatch, request])
 
-  const isAuthenticated = !!token || !!data.token
+  const isAuthenticated = !!token || !!(data && data.token)
   const routes = useRoutes(isAuthenticated);
 
   if (!pizza.length) {
