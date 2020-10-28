@@ -25,8 +25,11 @@ const Navbar = ({ token, cart, logout }) => {
                 ? <span className="order-count">{cart.length}</span>
                 : ''
             }</NavLink></li>
-            { token && <li><NavLink to="/orders">Your Orders</NavLink></li> }
-            { token && <li><a href="/" onClick={logoutHandler}>Log Out</a></li> }
+            { token && <li><NavLink to="/orders">Your Orders</NavLink></li>}
+            { token
+              ? <li><a href="/" onClick={logoutHandler}>Log Out</a></li>
+              : <li><NavLink to="/login">Log In</NavLink></li>
+            }
           </ul>
         </div>
       </nav>

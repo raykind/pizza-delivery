@@ -26,22 +26,20 @@ const MakeOrder = ({ cart, userId, token }) => {
     setIsComplete(true)
     setAddress(addressStr)
 
-    if (token) {
-      const orderData = {
-        address: addressStr,
-        total,
-        userId,
-        order: []
-      }
-
-      orderData.order = cart.map(pizzaItem => {
-        return pizzaItem._id
-      })
-
-      await request('/api/orders/save', 'POST', {
-        ...orderData
-      })
+    const orderData = {
+      address: addressStr,
+      total,
+      userId,
+      order: []
     }
+
+    orderData.order = cart.map(pizzaItem => {
+      return pizzaItem._id
+    })
+
+    await request('/api/orders/save', 'POST', {
+      ...orderData
+    })
   }
 
   if (!isComplete) {

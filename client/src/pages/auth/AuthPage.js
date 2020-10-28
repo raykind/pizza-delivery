@@ -1,10 +1,13 @@
 import React, {useEffect, useState} from 'react'
 import {useHttp} from "../../hooks/http.hook";
+import {useHistory} from 'react-router-dom'
 import {useMessage} from "../../hooks/message.hook";
 import {login} from "../../redux/actions";
 import {connect} from "react-redux";
 
 const AuthPage = ({ login }) => {
+  const history = useHistory()
+
   const {loading, request, error, clearError} = useHttp()
   const message = useMessage()
   const [form, setForm] = useState({
@@ -39,6 +42,7 @@ const AuthPage = ({ login }) => {
       const userObject = {token: data.token, userId: data.userId}
       login(userObject)
       localStorage.setItem('userData', JSON.stringify(userObject))
+      history.push('/')
     } catch (e) {
     }
   }

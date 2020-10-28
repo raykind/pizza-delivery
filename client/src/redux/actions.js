@@ -21,12 +21,8 @@ export function logout() {
 export function getAllPizza(request) {
   return async dispatch => {
     try {
-      const token = JSON.parse(localStorage.getItem('userData')).token
-
       setTimeout(async () => {
-        const data = await request('/api/menu/getAllPizza', 'GET', null, {
-          Authorization: 'Bearer ' + token
-        })
+        const data = await request('/api/menu/getAllPizza', 'GET')
 
         dispatch({ type: GET_ALL_PIZZA_LOADED, payload: data })
       }, 2000)
